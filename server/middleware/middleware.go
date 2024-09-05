@@ -167,6 +167,7 @@ func taskComplete(task string) error {
 func getAllTasks() ([]primitive.M, error) {
 	curr, err := collection.Find(context.Background(), bson.M{})
 	if err != nil {
+		log.Printf("Error fetching tasks from mongoDb: %v", err)
 		return nil, err
 	}
 
@@ -174,6 +175,7 @@ func getAllTasks() ([]primitive.M, error) {
 	for curr.Next(context.Background()) {
 		var result bson.M
 		if err := curr.Decode(&result); err != nil {
+			log.Printf("Error decoding task: %v", err)
 			return nil, err
 		}
 		results = append(results, result)
@@ -184,6 +186,7 @@ func getAllTasks() ([]primitive.M, error) {
 	}
 
 	curr.Close(context.Background())
+	log.Printf("Fetched %d tasks", len(results))
 	return results, nil
 }
 
