@@ -14,17 +14,7 @@ class TodoList extends Component{
         }
     }
 
-    updateTask = (id)=>{
-        
-        axios.put(endpoint+"/api/task"+id,{
-            headers:{
-                "content-Type":"application/json",
-                },
-            }).then(()=>{
-                console.log("Task updated");
-                this.getTask();
-            });
-        }
+    
     
 
     getTask =()=>{
@@ -55,7 +45,7 @@ class TodoList extends Component{
                                             color="blue"
                                             onClick={()=>this.updateTask(item._id)}
                                         />
-                                        <span style ={{paddingRight:"10px"}}>Udo</span>
+                                        <span style ={{paddingRight:"10px"}}>Undo</span>
                                         <Icon 
                                             name="delete" 
                                             color="red"
@@ -77,6 +67,18 @@ class TodoList extends Component{
         });
     };
 
+    updateTask = (id)=>{
+        
+        axios.put(endpoint+"/api/task/"+id,{
+            headers:{
+                "content-Type":"application/json",
+                },
+            }).then(()=>{
+                console.log("Task updated");
+                this.getTask();
+            });
+        }
+
     componentDidMount(){
         this.getTask();
     }
@@ -91,10 +93,10 @@ class TodoList extends Component{
         let {task} = this.state;
 
         if(task){
-            axios.post(endpoint+"/api/task",
+            axios.post(endpoint+"/api/tasks",
                 {task,},
                 {headers:{
-                    
+
                     "content-Type":"application/json",
                 }
             }
@@ -110,7 +112,7 @@ class TodoList extends Component{
     
 
     undoTask = (id)=>{
-        axios.put(endpoint, "/api/undotask " + id, {
+        axios.put(endpoint, "/api/undotask/ " + id, {
             headers:{
                 "content-Type":"application/json",
             },
@@ -121,7 +123,7 @@ class TodoList extends Component{
     }
 
     deleteTask = (id)=>{
-        axios.delete(endpoint + "/api/deleteTask" +id ,{
+        axios.delete(endpoint + "/api/deleteTask/" +id ,{
             headers:{
                 "content-Type":"application/json",
             },
