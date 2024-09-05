@@ -1,15 +1,15 @@
 import react from 'react';
 import './App.css';
-import {container} from 'semantic-ui-react';  
+import { Container }  from 'semantic-ui-react';  
 import TodoList from './TodoList';
 
 
 function App(){
   return (
     <div>
-      <container>
+      <Container>
         <TodoList/>
-      </container>
+      </Container>
     </div>
   );
 }
