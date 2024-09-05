@@ -9,6 +9,8 @@ import (
 func Router() *mux.Router {
 	router := mux.NewRouter()
 
+	router.Use(middleware.EnableCors)
+
 	//mux is used to match the incoming requests to their respective handler functions.
 
 	router.HandleFunc("/api/task", middleware.GetAllTasks).Methods("GET", "OPTIONS")

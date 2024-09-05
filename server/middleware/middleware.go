@@ -17,6 +17,23 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+func EnableCors(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Set CORS headers to allow requests from the frontend
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")            // Allow the frontend origin
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE") // Allowed HTTP methods
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")     // Allow Content-Type header
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		// Pass the request down the chain
+		next.ServeHTTP(w, r)
+	})
+}
+
 var collection *mongo.Collection
 
 func init() {
