@@ -49,7 +49,7 @@ func createDBInstance() {
 
 	log.Println("Connected to MongoDB")
 	collection = client.Database(dbName).Collection(collName)
-	log.Printf("Collection %v instance created", collection)
+	log.Printf("Collection instance created")
 }
 
 func GetAllTasks(w http.ResponseWriter, r *http.Request) {
