@@ -2,7 +2,8 @@ import React,{Component} from "react";
 import axios from 'axios';
 import {Card, Header, Form, Input, Icon } from 'semantic-ui-react';
 
-let endpoint = "http://localhost";
+let endpoint = "http://backend-service:8080";
+
 
 class TodoList extends Component{
     constructor(props){
