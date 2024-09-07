@@ -71,15 +71,20 @@ class ToDoList extends Component {
                 <Card.Content>
                   <Card.Header textAlign="left">
                     <div style={style}>
-                      {typeof item.task === "string"
-                        ? item.task
-                        : JSON.stringify(item.task)}
+                      {typeof item.task === "object"
+                        ? item.task.task
+                        : item.task}
                     </div>
                   </Card.Header>
                   <Card.Meta textAlign="right">
                     <Icon
                       name="check circle"
                       color="blue"
+                      onClick={() => this.updateTask(item._id)}
+                    />
+                    <Icon
+                      name="undo"
+                      color="green"
                       onClick={() => this.undoTask(item._id)}
                     />
                     <Icon
@@ -87,7 +92,6 @@ class ToDoList extends Component {
                       color="red"
                       onClick={() => this.deleteTask(item._id)}
                     />
-                    <span style={{ paddingRight: 10 }}>Delete</span>
                   </Card.Meta>
                 </Card.Content>
               </Card>
@@ -117,11 +121,15 @@ class ToDoList extends Component {
 
   undoTask = (id) => {
     axios
-      .put(`${endpoint}/api/undoTask/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .put(
+        `${endpoint}/api/undoTask/${id}`,
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
         console.log(res);
         this.getTask();
