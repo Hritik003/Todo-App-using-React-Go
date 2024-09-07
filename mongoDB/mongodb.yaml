@@ -21,9 +21,9 @@ spec:
         volumeMounts:
         - name: mongo-data
           mountPath: /data/db
-        volumes:
-        - name: mongo-data
-          emptyDir: {}
+      volumes:
+      - name: mongo-data
+        emptyDir: {}
 
 --- 
 #mongo service

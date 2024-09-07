@@ -8,16 +8,16 @@ spec:
   selector: 
     matchLabels:
       app: frontend
-    template:
-      metadata:
-        labels:
-          app: frontend
-      spec:
-        containers:
-        - name : frontend
-          image: hritikraj003/todo-frontend
-          ports: 
-          - containerPort: 80
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name : frontend
+        image: hritikraj003/todo-frontend
+        ports: 
+        - containerPort: 80
 
 ---
 #frontend service
